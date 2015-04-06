@@ -10,7 +10,7 @@ public class PowerMax : MonoBehaviour {
     public ParticleEmitter blastPart;
     public Light cannonLight;
     public Transform spawnPos;
-    public float shotForce = 5;
+    public float shotForce = 30;
     public AudioClip cannonBlast;
 
     public float barDisplay; //current progress
@@ -98,7 +98,6 @@ public class PowerMax : MonoBehaviour {
 
         barDisplay -= Time.deltaTime * barSpeed;
         barDisplay = Mathf.Clamp(barDisplay, 0, fullWidth);
-        //audio.pitch = thePower/30;
     }
 
 
@@ -109,26 +108,11 @@ public class PowerMax : MonoBehaviour {
 
         barDisplay += Time.deltaTime * barSpeed;
         barDisplay = Mathf.Clamp(barDisplay, 0, fullWidth);
-
-            //audio.pitch = thePower/30;
     }
 
     private void Shoot(float power)
     {
         shooting = true;
-
-        //ParticleEmitter pBlast = (ParticleEmitter)Instantiate(blastPart, spawnPos.position, spawnPos.rotation);
-
-        //pBlast.maxEmission = power / 4;
-
-        //Light canLight = (Light)Instantiate(cannonLight, spawnPos.position, spawnPos.rotation);
-        //canLight.intensity = power / 7;
-        //canLight.range = power / 7;
-        //Destroy(canLight.gameObject, 1);
-
-        //audio.stop();
-
-        //AudioSource.PlayClipAtPoint(cannonBlast, transform.position);
 
         cScript.Fire(power * shotForce);
             

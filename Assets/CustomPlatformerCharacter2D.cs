@@ -6,9 +6,12 @@ namespace UnityStandardAssets._2D
 {
     public class CustomPlatformerCharacter2D : MonoBehaviour
     {
-        [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-        [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-        [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+        [SerializeField]
+        private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
+        [SerializeField]
+        private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
+        [SerializeField]
+        private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -19,7 +22,8 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
-        private Text text;
+        private Text distanceText;
+        private Text bestText;
 
         private void Awake()
         {
@@ -31,11 +35,20 @@ namespace UnityStandardAssets._2D
         }
         private void Start()
         {
-            text = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
+            distanceText = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
+            bestText = (Text)GameObject.Find("BestText").GetComponent<Text>();
         }
         private void Update()
         {
-            text.text = "Distance: " + (int)((m_Rigidbody2D.position.x + 8.25) * 10);
+            int dudeLocation = (int)((m_Rigidbody2D.position.x + 8.25) * 10);
+            distanceText.text = "Distance: " + dudeLocation;
+
+            int bestLocation = 0;
+            int.TryParse(bestText.text, out bestLocation);
+
+            if (dudeLocation > bestLocation)
+                bestText.text = dudeLocation.ToString();
+
         }
 
         private void FixedUpdate()
@@ -76,13 +89,13 @@ namespace UnityStandardAssets._2D
             if (m_Grounded || m_AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
-               // move = (crouch ? move*m_CrouchSpeed : move);
+                // move = (crouch ? move*m_CrouchSpeed : move);
 
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 //m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
                 if (move > 0 && !m_FacingRight)
@@ -90,7 +103,7 @@ namespace UnityStandardAssets._2D
                     // ... flip the player.
                     Flip();
                 }
-                    // Otherwise if the input is moving the player left and the player is facing right...
+                // Otherwise if the input is moving the player left and the player is facing right...
                 else if (move < 0 && m_FacingRight)
                 {
                     // ... flip the player.

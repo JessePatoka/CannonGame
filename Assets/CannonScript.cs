@@ -46,7 +46,6 @@ public class CannonScript : MonoBehaviour
         {
             Rotate();
         }
-        //text.text = "Distance: " + (int)((playerRigidBody.position.x + 8.25) * 10);
     }
 
     private void Rotate()
