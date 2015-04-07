@@ -24,13 +24,12 @@ public class Cannon2Launcher : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(GameObject.Find("CustomPlayer(Clone)"));
+            Destroy(other.transform.root.gameObject); //test
 
             if (playercounter < 2)
             {
                 playercounter++;
                 cScript.Fire(cannonForce);
-                
             }
         }
     }

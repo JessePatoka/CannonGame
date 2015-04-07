@@ -9,3 +9,4 @@ E:\Storage\Unity\CannonGame\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
 E:\Storage\Unity\CannonGame\obj\Debug\UnityVS.CannonGame.CSharp.csprojResolveAssemblyReference.cache
 E:\Storage\Unity\CannonGame\obj\Debug\Assembly-CSharp.dll
 E:\Storage\Unity\CannonGame\obj\Debug\Assembly-CSharp.pdb
+E:\Storage\Unity\CannonGame\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb

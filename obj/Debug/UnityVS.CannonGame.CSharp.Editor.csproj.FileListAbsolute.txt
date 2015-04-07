@@ -32,3 +32,5 @@ E:\Storage\Unity\CannonGame\Temp\UnityVS_bin\Debug\UnityEditor.OSXStandalone.Ext
 E:\Storage\Unity\CannonGame\obj\Debug\UnityVS.CannonGame.CSharp.Editor.csprojResolveAssemblyReference.cache
 E:\Storage\Unity\CannonGame\obj\Debug\Assembly-CSharp-Editor.dll
 E:\Storage\Unity\CannonGame\obj\Debug\Assembly-CSharp-Editor.pdb
+E:\Storage\Unity\CannonGame\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+E:\Storage\Unity\CannonGame\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb
