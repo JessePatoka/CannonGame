@@ -24,12 +24,13 @@ public class Cannon2Launcher : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(other.transform.root.gameObject); //test
+            var playerRigidBody = other.transform.root.gameObject.GetComponent<Rigidbody2D>();
+            Destroy(other.transform.root.gameObject);
 
             if (playercounter < 2)
             {
                 playercounter++;
-                cScript.Fire(cannonForce);
+                cScript.Fire(cannonForce * (playerRigidBody.velocity.magnitude / 10));
             }
         }
     }

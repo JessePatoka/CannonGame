@@ -6,6 +6,9 @@ namespace UnityStandardAssets._2D
 {
     public class CustomPlatformerCharacter2D : MonoBehaviour
     {
+        public GameObject DistanceTextGO;
+        public GameObject BestTextGO;
+
         [SerializeField]
         private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField]
@@ -35,8 +38,8 @@ namespace UnityStandardAssets._2D
         }
         private void Start()
         {
-            distanceText = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
-            bestText = (Text)GameObject.Find("BestText").GetComponent<Text>();
+            distanceText = (Text)DistanceTextGO.GetComponent<Text>();
+            bestText = (Text)BestTextGO.GetComponent<Text>();
         }
         private void Update()
         {

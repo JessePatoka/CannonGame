@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityStandardAssets._2D;
 using System;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CannonScript : MonoBehaviour
@@ -17,11 +18,13 @@ public class CannonScript : MonoBehaviour
 
     private GameObject mainCamera;
     private bool isMovingClockwise = false;
+    private List<Rigidbody2D> playerList;
 
 
     // Use this for initialization
     void Start()
     {
+        playerList = new List<Rigidbody2D>();
         cannonButt = transform.Find("CannonButt");
         cannonNose = transform.Find("CannonNose");
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
@@ -34,6 +37,12 @@ public class CannonScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerList.Count > 15)
+        {
+            Destroy(playerList[0].transform.root.gameObject);
+            playerList.RemoveAt(0);
+        }
+
         if (this.gameObject != GameObject.Find("Cannon2"))
         {
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -100,6 +109,8 @@ public class CannonScript : MonoBehaviour
         Vector3 dir = Quaternion.AngleAxis(Angle, Vector3.forward) * Vector3.right;
 
         Rigidbody2D pFab = (Rigidbody2D)Instantiate(playerRigidBody, cannonNose.position, cannonNose.rotation);
+
+        playerList.Add(pFab);
 
         camScript.target = pFab.transform;
 

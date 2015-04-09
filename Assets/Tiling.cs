@@ -7,7 +7,7 @@ public class Tiling : MonoBehaviour {
 	public int offsetX = 2;
 	public bool hasARightBuddy = false;
 	public bool hasALeftBuddy = false;
-	public bool reverseScale = false; //used if the object is not tilable
+	public bool reverseScale = true; //used if the object is not tilable
 
 	private float spriteWidth = 0f;
 	private Camera cam;
@@ -41,11 +41,11 @@ public class Tiling : MonoBehaviour {
 				MakeNewBuddy(1);
 				hasARightBuddy = true;
 			}
-			else if (cam.transform.position.x <= edgeVisiblePositionLeft + offsetX && hasALeftBuddy == false)
-			{
-				MakeNewBuddy(-1);
-				hasALeftBuddy = true;
-			}
+			//else if (cam.transform.position.x <= edgeVisiblePositionLeft + offsetX && hasALeftBuddy == false)
+			//{
+			//	MakeNewBuddy(-1);
+			//	hasALeftBuddy = true;
+			//}
 		}
 	}
 	/// <summary>

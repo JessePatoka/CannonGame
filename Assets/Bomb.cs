@@ -39,7 +39,7 @@ public class Bomb : MonoBehaviour {
     }
     private void PlayExplosion()
     {
-        GameObject explosion = (GameObject)Instantiate(Explosion);
+        GameObject explosion = Instantiate(Explosion);
         explosion.transform.position = transform.position;
     }
     private void OnTriggerEnter2D(Collider2D other)
