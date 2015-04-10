@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class PowerMax : MonoBehaviour {
+public class PowerMax : MonoBehaviour
+{
     public float fullWidth = 200;
     public bool increasing = false;
     public bool shooting = false;
@@ -24,11 +25,13 @@ public class PowerMax : MonoBehaviour {
     private CannonScript cScript;
     private bool decreasing;
 
+    public GameObject Cannon;
+
 
     // Use this for initialization
     void Start()
     {
-        cannon = GameObject.Find("Cannon");
+        cannon = Cannon;
         cScript = (CannonScript)cannon.GetComponent<CannonScript>();
 
         barDisplay = 0;
@@ -95,7 +98,6 @@ public class PowerMax : MonoBehaviour {
 
     private void PowerDown()
     {
-
         barDisplay -= Time.deltaTime * barSpeed;
         barDisplay = Mathf.Clamp(barDisplay, 0, fullWidth);
     }
@@ -115,6 +117,5 @@ public class PowerMax : MonoBehaviour {
         shooting = true;
 
         cScript.Fire(power * shotForce);
-            
-            }
+    }
 }

@@ -30,7 +30,8 @@ public class Bomb : MonoBehaviour {
             else
             {
                 PlayExplosion();
-                Object.Destroy(this.gameObject.transform.parent.gameObject);
+                //Object.Destroy(this.gameObject.transform.parent.gameObject);
+                gameObject.SetActive(false);
             }
 
             explosion_radius.radius = current_radius;

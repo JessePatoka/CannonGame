@@ -16,7 +16,7 @@ public class CannonScript : MonoBehaviour
     private Rigidbody2D playerRigidBody;
     private Camera2DFollow camScript;
 
-    private GameObject mainCamera;
+    public GameObject mainCamera;
     private bool isMovingClockwise = false;
     private List<Rigidbody2D> playerList;
 
@@ -30,7 +30,6 @@ public class CannonScript : MonoBehaviour
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
         //text = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
 
-        mainCamera = GameObject.Find("MainCamera");
         camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
     }
 
