@@ -2491,6 +2491,7 @@ MonoBehaviour:
   Bomb3: {fileID: 633108524}
   Cannon1: {fileID: 95687525}
   mainCamera: {fileID: 1332926274}
+  BombPrefab: {fileID: 413312, guid: 8c183ac096342a345a973bf5aaeceb7b, type: 2}
 --- !u!114 &1215328189
 MonoBehaviour:
   m_ObjectHideFlags: 0
