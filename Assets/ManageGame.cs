@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets._2D;
 
@@ -11,6 +12,7 @@ public class ManageGame : MonoBehaviour
     public GameObject mainCamera;
     public Transform BombPrefab;
 
+    private Cannon2Launcher cannon2script;
     private PowerMax powerMaxScript;
     private Camera2DFollow camScript;
     private Text distanceText;
@@ -24,6 +26,7 @@ public class ManageGame : MonoBehaviour
     private Canvas submitHS;
     private Canvas validationCanvas;
     private Canvas successCanvas;
+    private Stopwatch stopWatch;
     // Use this for initialization
     void Start()
     {
@@ -31,6 +34,7 @@ public class ManageGame : MonoBehaviour
         distanceText.text = "Distance: 0";
         camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
         powerMaxScript = (PowerMax)gameObject.GetComponent<PowerMax>();
+        cannon2script = (Cannon2Launcher)GameObject.Find("CannonReceiver").GetComponent<Cannon2Launcher>();
 
         bomb1position = new Vector3(Bomb1.transform.position.x, Bomb1.transform.position.y);
         bomb2position = new Vector3(Bomb2.transform.position.x, Bomb2.transform.position.y);
@@ -47,16 +51,21 @@ public class ManageGame : MonoBehaviour
         submitButton.enabled = false;
         validationCanvas.enabled = false;
         successCanvas.enabled = false;
+        stopWatch = new Stopwatch();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        long stopwatchElapsedMilli = (stopWatch.IsRunning) ? stopWatch.ElapsedMilliseconds : 4000;
+        if (Input.GetKey(KeyCode.Escape) && stopwatchElapsedMilli > 3000)
         {
-            
+            stopWatch.Start();
             //Application.LoadLevel(0);
+            submitHS.enabled = false;
+            validationCanvas.enabled = false;
+            successCanvas.enabled = false;
 
             //reset camera
             camScript.target = Cannon1.transform;
@@ -80,6 +89,18 @@ public class ManageGame : MonoBehaviour
             //reset powerbar
             powerMaxScript.barDisplay = 0;
             powerMaxScript.shooting = false;
+            cannon2script.BUSY = false;
         }
+    }
+
+    public void ShotsFired()
+    {
+        if(stopWatch.IsRunning)
+        {
+            stopWatch.Reset();
+        }
+
+        stopWatch.Start();
+
     }
 }

@@ -15,6 +15,7 @@ public class CannonScript : MonoBehaviour
     private Transform cannonNose;
     private Rigidbody2D playerRigidBody;
     private Camera2DFollow camScript;
+    private ManageGame manageGameScript;
 
     public GameObject mainCamera;
     private bool isMovingClockwise = false;
@@ -32,6 +33,7 @@ public class CannonScript : MonoBehaviour
 
 
         camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
+        manageGameScript = (ManageGame)GameObject.Find("_GM").GetComponent<ManageGame>();
     }
 
     // Update is called once per frame
@@ -117,6 +119,8 @@ public class CannonScript : MonoBehaviour
         pFab.AddForce(dir * force);
 
         pFab.AddTorque(force);
+
+        manageGameScript.ShotsFired();
 
     }
 

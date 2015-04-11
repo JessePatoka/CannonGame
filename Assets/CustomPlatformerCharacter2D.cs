@@ -27,6 +27,7 @@ namespace UnityStandardAssets._2D
         private Canvas submitButton;
         private int lastHighScoreSubmitted;
 
+
         private void Awake()
         {
             // Setting up references.
@@ -79,6 +80,10 @@ namespace UnityStandardAssets._2D
             //m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
         }
 
+        public void HighscoreSubmitted()
+        {
+           Int32.TryParse(bestText.text, out lastHighScoreSubmitted);
+        }
 
         public void Move(float move, bool crouch, bool jump)
         {

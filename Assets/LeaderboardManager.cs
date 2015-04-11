@@ -15,9 +15,10 @@ public class LeaderboardManager : MonoBehaviour {
     public Text HighScoreBoardText;
     public Text PlayerBestScoreText;
     public Text PlayerName;
-    public Button scoreSubmitButton;
     public Canvas ValidationStringCanvas;
     public Canvas SuccessStringCanvas;
+    public Canvas SubmitHSCanvas;
+    public Canvas SubmitButtonCanvas;
 
 
     void Start(){
@@ -32,12 +33,15 @@ public class LeaderboardManager : MonoBehaviour {
     {
         if (isNameValid(PlayerName.text.TrimEnd()))
         {
-            scoreSubmitButton.interactable = false;
+            SubmitButtonCanvas.enabled = false;
             ValidationStringCanvas.enabled = false;
+            SuccessStringCanvas.enabled = false;
             string name = PlayerName.text.TrimEnd().ToString();
             int score = Int32.Parse(PlayerBestScoreText.text);
             StartCoroutine(PostScores(name, score));
             SuccessStringCanvas.enabled = true;
+            SubmitHSCanvas.enabled = false;
+            SubmitButtonCanvas.enabled = false;
         }
         else
         {
@@ -81,8 +85,6 @@ public class LeaderboardManager : MonoBehaviour {
 		} else {
 			RefreshLeaderboard();
 		}
-
-		scoreSubmitButton.interactable = true;
 	}
 
 	// Get the scores from the MySQL DB to display in a GUIText.

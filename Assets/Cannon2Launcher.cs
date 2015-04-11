@@ -5,13 +5,13 @@ public class Cannon2Launcher : MonoBehaviour {
     private CannonScript cScript;
     public float cannonForce;
     private GameObject cannon;
-    private int playercounter;
+    public bool BUSY;
     // Use this for initialization
     void Start ()
     {
         cannon = GameObject.Find("Cannon2");
         cScript = (CannonScript)cannon.GetComponent<CannonScript>();
-        playercounter = 1;
+
     }
 	
 	// Update is called once per frame
@@ -22,14 +22,13 @@ public class Cannon2Launcher : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (!BUSY)
         {
-            var playerRigidBody = other.transform.root.gameObject.GetComponent<Rigidbody2D>();
-            Destroy(other.transform.root.gameObject);
-
-            if (playercounter < 2)
+            if (other.gameObject.tag == "Player")
             {
-                playercounter++;
+                BUSY = true;
+                var playerRigidBody = other.transform.root.gameObject.GetComponent<Rigidbody2D>();
+                Destroy(other.transform.root.gameObject);
                 cScript.Fire(cannonForce * (playerRigidBody.velocity.magnitude / 10));
             }
         }
