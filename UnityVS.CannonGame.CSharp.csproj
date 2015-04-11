@@ -68,6 +68,8 @@
     <Compile Include="Assets\CustomPlatformerCharacter2D.cs" />
     <Compile Include="Assets\Destroyer.cs" />
     <Compile Include="Assets\DontDestroy.cs" />
+    <Compile Include="Assets\EnableScript.cs" />
+    <Compile Include="Assets\LeaderboardManager.cs" />
     <Compile Include="Assets\ManageGame.cs" />
     <Compile Include="Assets\Parallaxing.cs" />
     <Compile Include="Assets\PhysicsTest.cs" />

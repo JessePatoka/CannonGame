@@ -30,6 +30,7 @@ public class CannonScript : MonoBehaviour
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
         //text = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
 
+
         camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
     }
 

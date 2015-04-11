@@ -20,6 +20,8 @@ public class ManageGame : MonoBehaviour
     private Quaternion bomb1rotation;
     private Quaternion bomb2rotation;
     private Quaternion bomb3rotation;
+    private Canvas submitButton;
+    private Canvas submitHS;
     // Use this for initialization
     void Start()
     {
@@ -34,6 +36,12 @@ public class ManageGame : MonoBehaviour
         bomb1rotation = new Quaternion(Bomb1.transform.rotation.x, Bomb1.transform.rotation.y, Bomb1.transform.rotation.z, Bomb1.transform.rotation.w);
         bomb2rotation = new Quaternion(Bomb2.transform.rotation.x, Bomb2.transform.rotation.y, Bomb2.transform.rotation.z, Bomb2.transform.rotation.w);
         bomb3rotation = new Quaternion(Bomb3.transform.rotation.x, Bomb3.transform.rotation.y, Bomb3.transform.rotation.z, Bomb3.transform.rotation.w);
+
+        submitButton = (Canvas)GameObject.Find("SubmitButtonCanvas").GetComponent<Canvas>();
+        submitHS = (Canvas)GameObject.Find("SubmitHSCanvas").GetComponent<Canvas>();
+        submitHS.enabled = false;
+        submitButton.enabled = false;
+        
     }
 
     // Update is called once per frame

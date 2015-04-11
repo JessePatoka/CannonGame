@@ -24,13 +24,14 @@ public class PowerMax : MonoBehaviour
     private GameObject cannon;
     private CannonScript cScript;
     private bool decreasing;
-
+    private Canvas splashScreen;
     public GameObject Cannon;
 
 
     // Use this for initialization
     void Start()
     {
+        splashScreen = (Canvas)GameObject.Find("SplashScreenCanvas").GetComponent<Canvas>();
         cannon = Cannon;
         cScript = (CannonScript)cannon.GetComponent<CannonScript>();
 
@@ -58,41 +59,43 @@ public class PowerMax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //http://www.unity3dstudent.com/2011/01/worms-style-power-bar/
-        if (!shooting && Input.GetButtonDown("Jump"))
+        if (!splashScreen.enabled)
         {
-            increasing = true;
-            PowerUp();
-        }
-
-        if (!shooting && Input.GetButton("Jump"))
-        {
-            //audio.Play();
-            if (barDisplay >= 1)
-            {
-                increasing = false;
-                decreasing = true;
-            }
-            else if (barDisplay <= 0)
+            //http://www.unity3dstudent.com/2011/01/worms-style-power-bar/
+            if (!shooting && Input.GetButtonDown("Jump"))
             {
                 increasing = true;
-                decreasing = false;
+                PowerUp();
             }
+
+            if (!shooting && Input.GetButton("Jump"))
+            {
+                //audio.Play();
+                if (barDisplay >= 1)
+                {
+                    increasing = false;
+                    decreasing = true;
+                }
+                else if (barDisplay <= 0)
+                {
+                    increasing = true;
+                    decreasing = false;
+                }
+            }
+
+            if (!shooting && Input.GetButtonUp("Jump"))
+            {
+                increasing = false;
+                decreasing = false;
+                Shoot(barDisplay);
+            }
+
+
+            if (increasing)
+                PowerUp();
+            else if (decreasing)
+                PowerDown();
         }
-
-        if (!shooting && Input.GetButtonUp("Jump"))
-        {
-            increasing = false;
-            decreasing = false;
-            Shoot(barDisplay);
-        }
-
-
-        if (increasing)
-            PowerUp();
-        else if (decreasing)
-            PowerDown();
-
     }
 
 

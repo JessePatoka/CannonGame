@@ -24,6 +24,8 @@ namespace UnityStandardAssets._2D
 
         private Text distanceText;
         private Text bestText;
+        private Canvas submitButton;
+        private int lastHighScoreSubmitted;
 
         private void Awake()
         {
@@ -37,6 +39,8 @@ namespace UnityStandardAssets._2D
         {
             distanceText = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
             bestText = (Text)GameObject.Find("BestText").GetComponent<Text>();
+            submitButton = (Canvas)GameObject.Find("SubmitButtonCanvas").GetComponent<Canvas>();
+            lastHighScoreSubmitted = 0;
         }
         private void Update()
         {
@@ -47,8 +51,14 @@ namespace UnityStandardAssets._2D
             int.TryParse(bestText.text, out bestLocation);
 
             if (dudeLocation > bestLocation)
+            {
                 bestText.text = dudeLocation.ToString();
 
+                if (dudeLocation > lastHighScoreSubmitted)
+                {
+                    submitButton.enabled = true;
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -72,27 +82,9 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
-            // If crouching, check to see if the character can stand up
-            //if (!crouch && m_Anim.GetBool("Crouch"))
-            //{
-            //    // If the character has a ceiling preventing them from standing up, keep them crouching
-            //    if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
-            //    {
-            //        crouch = true;
-            //    }
-            //}
-
-            //// Set whether or not the character is crouching in the animator
-            //m_Anim.SetBool("Crouch", crouch);
-
             //only control the player if grounded or airControl is turned on
             if (m_Grounded || m_AirControl)
             {
-                // Reduce the speed if crouching by the crouchSpeed multiplier
-                // move = (crouch ? move*m_CrouchSpeed : move);
-
-                // The Speed animator parameter is set to the absolute value of the horizontal input.
-                //m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
                 // Move the character
                 m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
@@ -110,14 +102,6 @@ namespace UnityStandardAssets._2D
                     Flip();
                 }
             }
-            // If the player should jump...
-            //if (m_Grounded && jump && m_Anim.GetBool("Ground"))
-            //{
-            //    // Add a vertical force to the player.
-            //    m_Grounded = false;
-            //    m_Anim.SetBool("Ground", false);
-            //    m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            //}
         }
 
 
