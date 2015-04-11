@@ -22,6 +22,8 @@ public class ManageGame : MonoBehaviour
     private Quaternion bomb3rotation;
     private Canvas submitButton;
     private Canvas submitHS;
+    private Canvas validationCanvas;
+    private Canvas successCanvas;
     // Use this for initialization
     void Start()
     {
@@ -39,8 +41,12 @@ public class ManageGame : MonoBehaviour
 
         submitButton = (Canvas)GameObject.Find("SubmitButtonCanvas").GetComponent<Canvas>();
         submitHS = (Canvas)GameObject.Find("SubmitHSCanvas").GetComponent<Canvas>();
+        validationCanvas = (Canvas)GameObject.Find("ValidationStringCanvas").GetComponent<Canvas>();
+        successCanvas= (Canvas)GameObject.Find("SuccessStringCanvas").GetComponent<Canvas>();
         submitHS.enabled = false;
         submitButton.enabled = false;
+        validationCanvas.enabled = false;
+        successCanvas.enabled = false;
         
     }
 

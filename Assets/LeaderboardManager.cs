@@ -16,10 +16,11 @@ public class LeaderboardManager : MonoBehaviour {
     public Text PlayerBestScoreText;
     public Text PlayerName;
     public Button scoreSubmitButton;
-    public Text ValidationString;
-	
+    public Canvas ValidationStringCanvas;
+    public Canvas SuccessStringCanvas;
 
-	void Start(){
+
+    void Start(){
 		RefreshLeaderboard();
 	}
 
@@ -32,14 +33,15 @@ public class LeaderboardManager : MonoBehaviour {
         if (isNameValid(PlayerName.text.TrimEnd()))
         {
             scoreSubmitButton.interactable = false;
-            ValidationString.enabled = false;
+            ValidationStringCanvas.enabled = false;
             string name = PlayerName.text.TrimEnd().ToString();
             int score = Int32.Parse(PlayerBestScoreText.text);
             StartCoroutine(PostScores(name, score));
+            SuccessStringCanvas.enabled = true;
         }
         else
         {
-            ValidationString.enabled = true;
+            ValidationStringCanvas.enabled = true;
         }
     }
 
