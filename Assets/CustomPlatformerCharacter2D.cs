@@ -6,6 +6,9 @@ namespace UnityStandardAssets._2D
 {
     public class CustomPlatformerCharacter2D : MonoBehaviour
     {
+        private Camera2DFollow camScript;
+        private GameObject mainCamera;
+
         [SerializeField]
         private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField]
@@ -27,6 +30,8 @@ namespace UnityStandardAssets._2D
         private Canvas submitButton;
         private int lastHighScoreSubmitted;
 
+        private Transform farthestBody;
+
 
         private void Awake()
         {
@@ -41,24 +46,33 @@ namespace UnityStandardAssets._2D
             distanceText = (Text)GameObject.Find("DistanceText").GetComponent<Text>();
             bestText = (Text)GameObject.Find("BestText").GetComponent<Text>();
             submitButton = (Canvas)GameObject.Find("SubmitButtonCanvas").GetComponent<Canvas>();
+            mainCamera = GameObject.Find("MainCamera");
+            camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
             lastHighScoreSubmitted = 0;
         }
         private void Update()
         {
-            int dudeLocation = (int)((m_Rigidbody2D.position.x + 8.25) * 10);
-            distanceText.text = "Distance: " + dudeLocation;
-
-            int bestLocation = 0;
-            int.TryParse(bestText.text, out bestLocation);
-
-            if (dudeLocation > bestLocation)
+            if (camScript.target == gameObject.transform)
             {
-                bestText.text = dudeLocation.ToString();
+                int dudeLocation = (int)((m_Rigidbody2D.position.x + 8.25) * 10);
+                distanceText.text = "Distance: " + dudeLocation;
 
-                if (dudeLocation > lastHighScoreSubmitted)
+                int bestLocation = 0;
+                int.TryParse(bestText.text, out bestLocation);
+
+                if (dudeLocation > bestLocation)
                 {
-                    submitButton.enabled = true;
+                    bestText.text = dudeLocation.ToString();
+
+                    if (dudeLocation > lastHighScoreSubmitted)
+                    {
+                        submitButton.enabled = true;
+                    }
                 }
+            }
+            else
+            {
+                //Destroy(GetComponent<Rigidbody2D>());
             }
         }
 
