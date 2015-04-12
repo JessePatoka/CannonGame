@@ -30,8 +30,6 @@ namespace UnityStandardAssets._2D
         private Canvas submitButton;
         private int lastHighScoreSubmitted;
 
-        private Transform farthestBody;
-
 
         private void Awake()
         {
@@ -67,7 +65,6 @@ namespace UnityStandardAssets._2D
                     if (dudeLocation > lastHighScoreSubmitted)
                     {
                         submitButton.enabled = true;
-                    }
                 }
             }
             else
