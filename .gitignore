@@ -29,3 +29,8 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.chk
+.vs/UnityVS.CannonGame/v14/vbcs.cache/edb.log
+*.jrs
+.vs/UnityVS.CannonGame/v14/vbcs.cache/edbtmp.log
+*.ide

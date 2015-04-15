@@ -13,8 +13,6 @@ namespace UnityStandardAssets._2D
         private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField]
         private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
-        [SerializeField]
-        private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -29,6 +27,8 @@ namespace UnityStandardAssets._2D
         private Text bestText;
         private Canvas submitButton;
         private int lastHighScoreSubmitted;
+
+        private ManageGame manageGameScript;
 
 
         private void Awake()
@@ -47,6 +47,7 @@ namespace UnityStandardAssets._2D
             mainCamera = GameObject.Find("MainCamera");
             camScript = (Camera2DFollow)mainCamera.GetComponent<Camera2DFollow>();
             lastHighScoreSubmitted = 0;
+            manageGameScript = (ManageGame)GameObject.Find("_GM").GetComponent<ManageGame>();
         }
         private void Update()
         {
@@ -65,35 +66,24 @@ namespace UnityStandardAssets._2D
                     if (dudeLocation > lastHighScoreSubmitted)
                     {
                         submitButton.enabled = true;
+                        manageGameScript.BestPosition = gameObject.transform;
+                    }
                 }
             }
             else
             {
-                //Destroy(GetComponent<Rigidbody2D>());
+                //var alltheboxes = GetComponentsInChildren<BoxCollider2D>();
+                //foreach (BoxCollider2D box in alltheboxes)
+                //{
+                //    Destroy(box);
+                //}
             }
         }
 
-        private void FixedUpdate()
-        {
-            m_Grounded = false;
-
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject != gameObject)
-                    m_Grounded = true;
-            }
-            //m_Anim.SetBool("Ground", m_Grounded);
-
-            //// Set the vertical animation
-            //m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
-        }
 
         public void HighscoreSubmitted()
         {
-           Int32.TryParse(bestText.text, out lastHighScoreSubmitted);
+            Int32.TryParse(bestText.text, out lastHighScoreSubmitted);
         }
 
         public void Move(float move, bool crouch, bool jump)

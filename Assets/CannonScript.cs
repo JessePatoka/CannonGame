@@ -41,8 +41,11 @@ public class CannonScript : MonoBehaviour
     {
         if(playerList.Count > 15)
         {
-            Destroy(playerList[0].transform.root.gameObject);
-            playerList.RemoveAt(0);
+            if (playerList[0] != null)
+            {
+                Destroy(playerList[0].transform.root.gameObject);
+                playerList.RemoveAt(0);
+            }
         }
 
         if (this.gameObject != GameObject.Find("Cannon2"))

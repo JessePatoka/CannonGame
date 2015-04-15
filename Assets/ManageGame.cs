@@ -58,8 +58,8 @@ public class ManageGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        long stopwatchElapsedMilli = (stopWatch.IsRunning) ? stopWatch.ElapsedMilliseconds : 4000;
-        if (Input.GetKey(KeyCode.Escape) && stopwatchElapsedMilli > 3000)
+        long stopwatchElapsedMilli = (stopWatch.IsRunning) ? stopWatch.ElapsedMilliseconds : 2000;
+        if (Input.GetKey(KeyCode.Escape) && stopwatchElapsedMilli > 1700)
         {
             stopWatch.Start();
             //Application.LoadLevel(0);
@@ -92,6 +92,8 @@ public class ManageGame : MonoBehaviour
             cannon2script.BUSY = false;
         }
     }
+
+   public Transform BestPosition { get; set; }
 
     public void ShotsFired()
     {
